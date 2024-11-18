@@ -37,7 +37,7 @@ class NavigationDrawerWidget extends StatelessWidget {
               context,
               text: "Thông tin phần mềm",
               icon: Icons.info_outline,
-              page: SoftwareInfoScreen(),
+              page: const SoftwareInfoScreen(),
             ),
           ],
         ),
@@ -113,7 +113,7 @@ class GroupInfoScreen extends StatelessWidget {
               address: "Hà Nội, Việt Nam",
             ),
             BuildListTitle(
-              title: "Nguyễn Tuấn Huy",
+              title: "Lê Tuấn Huy",
               imageUrl: 'assets/images/anime3.jpg',
               phoneNumber: "0123456789",
               email: "huy@example.com",
@@ -225,27 +225,61 @@ class ProfileScreen extends StatelessWidget {
         title: Text(name),
         backgroundColor: Colors.indigo,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage(imageUrl),
-            ),
-            const SizedBox(height: 20),
-            Text('Name: $name', style: TextStyle(fontSize: 20)),
-            const SizedBox(height: 10),
-            Text('Phone: $phoneNumber', style: TextStyle(fontSize: 20)),
-            const SizedBox(height: 10),
-            Text('Email: $email', style: TextStyle(fontSize: 20)),
-            const SizedBox(height: 10),
-            Text('Address: $address', style: TextStyle(fontSize: 20)),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage(imageUrl),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Name: $name',
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Phone: $phoneNumber',
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Email: $email',
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Address: $address',
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
+
   }
 }
 

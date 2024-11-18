@@ -13,8 +13,8 @@ class TemperaturePage extends StatefulWidget {
 }
 
 class _TemperaturePageState extends State<TemperaturePage> {
-  double heating = 12;
-  double fan = 15;
+  double heating = 0;
+  double fan = 0;
 
   bool isFanOn = false; // State for Fan switch
   bool isACOn = false; // State for AC switch
@@ -27,47 +27,48 @@ class _TemperaturePageState extends State<TemperaturePage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.indigo,
-                ),
-              ),
-              const RotatedBox(
-                quarterTurns: 135,
-                child: Icon(
-                  Icons.bar_chart_rounded,
-                  color: Colors.indigo,
-                  size: 28,
-                ),
-              ),
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     GestureDetector(
+          //       onTap: () {
+          //         Navigator.pop(context);
+          //       },
+          //       child: const Icon(
+          //         Icons.arrow_back_ios,
+          //         color: Colors.indigo,
+          //       ),
+          //     ),
+          //     // const RotatedBox(
+          //     //   quarterTurns: 135,
+          //     //   child: Icon(
+          //     //     Icons.bar_chart_rounded,
+          //     //     color: Colors.indigo,
+          //     //     size: 28,
+          //     //   ),
+          //     // ),
+          //   ],
+          // ),
           Expanded(
             child: ListView(
               physics: const BouncingScrollPhysics(),
               children: [
                 const Center(
                   child: Text(
-                    'Điều Khiển',
+                    'ĐIỀU KHIỂN',
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black54),
+                        fontWeight: FontWeight.bold, color: Colors.black54,
+                    fontSize: 35),
                   ),
                 ),
                 const SizedBox(height: 15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _roundedButton(title: 'HUU', isActive: true),
-                    _roundedButton(title: 'THANG'),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     _roundedButton(title: 'HUU', isActive: true),
+                //     _roundedButton(title: 'THANG'),
+                //   ],
+                // ),
                 const SizedBox(height: 32),
                 // Heating Section
                 Container(
@@ -95,22 +96,26 @@ class _TemperaturePageState extends State<TemperaturePage> {
                       ),
                       Slider(
                         value: heating,
+                        min: 0,
+                        max: 100,
+                        divisions: 100,
+                        label: heating.round().toString(),
                         onChanged: (newHeating) {
                           setState(() => heating = newHeating);
                         },
-                        max: 30,
+
                       ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 24),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('0\u00B0'),
-                            Text('15\u00B0'),
-                            Text('30\u00B0'),
-                          ],
-                        ),
-                      )
+                      // const Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 24),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //     children: [
+                      //       Text('0\u00B0'),
+                      //       Text('15\u00B0'),
+                      //       Text('30\u00B0'),
+                      //     ],
+                      //   ),
+                      // )
                     ],
                   ),
                 ),
@@ -136,28 +141,21 @@ class _TemperaturePageState extends State<TemperaturePage> {
                       ),
                       Slider(
                         value: fan,
-                        onChanged: (newFan) {
-                          setState(() => fan = newFan);
+                        min: 0,
+                        max: 100,
+                        divisions: 100,
+                        label: fan.round().toString(),
+                        onChanged: (double newFan) {
+                          setState(() {
+                            fan = newFan;
+                          });
                         },
-                        max: 30,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 24),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('LOW'),
-                            Text('MID'),
-                            Text('HIGH'),
-                          ],
-                        ),
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 24),
 
-                // Control Buttons Section (Switches and Button)
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 18),
                   decoration: BoxDecoration(
@@ -172,9 +170,9 @@ class _TemperaturePageState extends State<TemperaturePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           // Fan ON/OFF Switch
-                          Column(
+                          Row(
                             children: [
-                              const Text('Fan ON/OFF'),
+
                               Switch(
                                 value: isFanOn,
                                 onChanged: (bool value) {
@@ -184,12 +182,11 @@ class _TemperaturePageState extends State<TemperaturePage> {
                                 },
                                 activeColor: Colors.indigo,
                               ),
+                              Text(isFanOn ? "ON" : "OFF", style: TextStyle(fontSize: 18)),
                             ],
                           ),
-                          // AC ON/OFF Switch
-                          Column(
+                          Row(
                             children: [
-                              const Text('AC ON/OFF'),
                               Switch(
                                 value: isACOn,
                                 onChanged: (bool value) {
@@ -199,6 +196,7 @@ class _TemperaturePageState extends State<TemperaturePage> {
                                 },
                                 activeColor: Colors.indigo,
                               ),
+                              Text(isACOn ? "ON" : "OFF", style: TextStyle(fontSize: 18)),
                             ],
                           ),
                         ],

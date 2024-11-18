@@ -45,20 +45,20 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.indigo.shade50,
         drawer: NavigationDrawerWidget(),
         appBar: AppBar(
-          title: Container(
-            alignment: Alignment.center,
-              child: const Text('Đom Đóm',textAlign: TextAlign.center,style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.yellow,
-                 shadows: [
-                  BoxShadow(
-                  color: Colors.black38,// đổ bóng
-                  offset:Offset(3, 10),
-                  blurRadius: 6// đổ bóng
-              )
-                  ]
-              ),)),
+          title: const Center(
+            child: Text('ĐOM ĐÓM',textAlign: TextAlign.center,style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.yellow,
+               shadows: [
+                BoxShadow(
+                color: Colors.black38,// đổ bóng
+                offset:Offset(3, 10),
+                blurRadius: 6// đổ bóng
+            )
+                ]
+            ),),
+          ),
           backgroundColor: Colors.indigo,
         ),
         body: _getBodyContent(_intpage),
